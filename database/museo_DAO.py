@@ -10,4 +10,23 @@ class MuseoDAO:
     def __init__(self):
         pass
 
+    @staticmethod
+    def leggi_museo():
+        musei = []
+        cnx = ConnessioneDB.get_connection()
+        if cnx is None:
+            print('Connessione fallita.')
+            return musei
+        else:
+            cursor = cnx.cursor(dictionary=True)
+            query = ("SELECT * "
+                     "FROM museo")
+            cursor.execute(query)
+            for row in cursor:
+                museo = Museo(row['id'], row['nome'], row['tipologia'])
+                musei.append(museo)
+            cursor.close()
+            cnx.close()
+            return musei
+
     # TODO
