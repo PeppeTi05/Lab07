@@ -35,15 +35,17 @@ class View:
         # --- Sezione 1: Intestazione ---
         self.txt_titolo = ft.Text(value="Musei di Torino", size=38, weight=ft.FontWeight.BOLD)
 
+        self.lista_artefatti = ft.ListView(expand=True, spacing=8, padding=10)
+
         # --- Sezione 2: Filtraggio ---
         self.dd_musei = ft.Dropdown(label = 'Musei',
                                     width = 500,
                                     expand=True,
-                                    on_change=self.controller.handler_dd_musei)
-        self.dd_artefatti = ft.Dropdown(label = 'Artefatti',
+                                    on_change=self.controller.on_select_museo)
+        self.dd_epoche = ft.Dropdown(label = 'Artefatti',
                                         width= 500,
                                         expand=True,
-                                        on_change=self.controller.handler_dd_artefatti)
+                                        on_change=self.controller.on_select_epoca)
         # TODO
 
         # Sezione 3: Artefatti
@@ -64,12 +66,14 @@ class View:
             ft.Divider(),
 
             # Sezione 2: Filtraggio
-            ft.Row([self.dd_musei, self.dd_artefatti], alignment=ft.MainAxisAlignment.CENTER),
+            ft.Row([self.dd_musei, self.dd_epoche], alignment=ft.MainAxisAlignment.CENTER),
             ft.Divider(),
             # TODO
 
             # Sezione 3: Artefatti
             ft.Row([btnArtefatti], alignment=ft.MainAxisAlignment.CENTER),
+
+            self.lista_artefatti,
             # TODO
         )
 
